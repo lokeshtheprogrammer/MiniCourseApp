@@ -169,7 +169,6 @@ const CourseDetail = () => {
                                 }`}
                                 onClick={handleSubscribe}
                             disabled={((course.price > 0) && (!isValidPromo)) || subscribing}
-
                             >
                                 {subscribing ? (
                                     <>
