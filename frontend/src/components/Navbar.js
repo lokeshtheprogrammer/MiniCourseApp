@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { logout, isAuthenticated, getCurrentUser } from '../utils/auth';
+import { logout, isAuthenticated, getCurrentUser, isAdmin } from '../utils/auth';
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const user = getCurrentUser();
+    const [user, setUser] = useState(null);
+    const [authenticated, setAuthenticated] = useState(false);
+
+    useEffect(() => {
+        setAuthenticated(isAuthenticated());
+        setUser(getCurrentUser());
+    }, []);
+
+    useEffect(() => {
+        const handleStorageChange = () => {
+            setAuthenticated(isAuthenticated());
+            setUser(getCurrentUser());
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+        window.addEventListener('authChange', handleStorageChange);
+        
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+            window.removeEventListener('authChange', handleStorageChange);
+        };
+    }, []);
 
     const handleLogout = () => {
         logout();
+        setAuthenticated(false);
+        setUser(null);
+        window.dispatchEvent(new Event('authChange'));
         navigate('/login');
     };
 
@@ -35,26 +59,36 @@ const Navbar = () => {
                                 <i className="bi bi-house-door-fill me-1"></i>Home
                             </Link>
                         </li>
-                        {isAuthenticated() ? (
+                        {authenticated ? (
                             <>
+                                {isAdmin() && (
+                                    <li className="nav-item">
+                                        <Link className="nav-link px-3 fw-semibold" to="/add-course">
+                                            <i className="bi bi-plus-circle me-1"></i>Add Course
+                                        </Link>
+                                    </li>
+                                )}
                                 <li className="nav-item">
                                     <Link className="nav-link px-3 fw-semibold" to="/my-courses">
                                         <i className="bi bi-person-video3 me-1"></i>My Courses
                                     </Link>
                                 </li>
-                                <li className="nav-item dropdown px-3">
-                                    <a className="nav-link dropdown-toggle fw-bold text-warning" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {user?.name || 'User'}
-                                    </a>
-                                    <ul className="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="navbarDropdown">
-                                        <li><button className="dropdown-item text-danger fw-bold" onClick={handleLogout}><i className="bi bi-box-arrow-right me-2"></i>Logout</button></li>
-                                    </ul>
+                                <li className="nav-item px-3 d-flex align-items-center">
+                                    <span className="nav-link fw-bold text-warning m-0">{user?.name || 'User'}</span>
+                                    <button className="btn btn-sm btn-outline-light ms-2" onClick={handleLogout}>
+                                        <i className="bi bi-box-arrow-right me-1"></i>Logout
+                                    </button>
                                 </li>
                             </>
                         ) : (
-                            <li className="nav-item">
-                                <Link className="nav-link px-3 btn btn-outline-light rounded-pill ms-2 fw-bold" to="/login">Login</Link>
-                            </li>
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link px-3 btn btn-outline-light rounded-pill ms-2 fw-bold" to="/login">Login</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link px-3 btn btn-outline-light rounded-pill ms-2 fw-bold" to="/signup">Sign Up</Link>
+                                </li>
+                            </>
                         )}
                     </ul>
                 </div>

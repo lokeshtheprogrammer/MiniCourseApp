@@ -40,8 +40,11 @@ npm run dev   # Starts server on port 5000
 ```
 
 **Dummy Users:**
-- Email: `user@example.com` / Password: `password123`
 - Email: `admin@example.com` / Password: `password123`
+- Email: `john@example.com` / Password: `password123`
+- Email: `jane@example.com` / Password: `password123`
+- Email: `bob@example.com` / Password: `password123`
+- Email: `alice@example.com` / Password: `password123`
 
 ### 3. Frontend Setup
 

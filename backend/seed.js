@@ -12,16 +12,31 @@ const users = [
         name: 'Admin User',
         email: 'admin@example.com',
         password: 'password123',
+        role: 'admin',
     },
     {
         name: 'John Doe',
         email: 'john@example.com',
         password: 'password123',
+        role: 'user',
     },
     {
         name: 'Jane Smith',
         email: 'jane@example.com',
         password: 'password123',
+        role: 'user',
+    },
+    {
+        name: 'Bob Johnson',
+        email: 'bob@example.com',
+        password: 'password123',
+        role: 'user',
+    },
+    {
+        name: 'Alice Brown',
+        email: 'alice@example.com',
+        password: 'password123',
+        role: 'user',
     },
 ];
 
@@ -54,7 +69,7 @@ const courses = [
         title: 'Intro to UI/UX Design',
         description: 'Fundamentals of design, wireframing, and prototyping for modern web apps.',
         price: 0,
-        image: 'https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?auto=format&fit=crop&q=80&w=400',
+        image: 'https://picsum.photos/400/250?random=5',
     },
 ];
 

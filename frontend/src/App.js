@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import CourseDetail from './pages/CourseDetail';
 import MyCourses from './pages/MyCourses';
+import Signup from './pages/Signup';
+import AddCourse from './pages/AddCourse';
 import { isAuthenticated } from './utils/auth';
 
 const PrivateRoute = ({ children }) => {
@@ -22,6 +24,18 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
+          <Route
+            path="/signup"
+            element={<Signup />}
+          />
+          <Route
+            path="/add-course"
+            element={
+              <PrivateRoute>
+                <AddCourse />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="/courses/:id"
             element={

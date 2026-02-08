@@ -15,6 +15,7 @@ router.post('/login', async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
+            role: user.role,
             token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
                 expiresIn: '30d',
             }),
@@ -47,6 +48,7 @@ router.post('/signup', async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
+            role: user.role,
             token: jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
                 expiresIn: '30d',
             }),
