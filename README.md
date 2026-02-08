@@ -65,17 +65,73 @@ The app will run on `http://localhost:3000`.
 - `POST /subscribe` - Subscribe to a course (Protected)
 - `GET /my-courses` - Get user subscriptions (Protected)
 
-## Deployment
+🚀 Deployment
+✅ Backend (Koyeb)
 
-### Backend (Render/Railway)
-1. Push `backend` folder to GitHub.
-2. Connect to Render/Railway.
-3. Set Environment Variables (`MONGO_URI`, `JWT_SECRET`).
-4. Build Command: `npm install`
-5. Start Command: `node server.js`
+Push backend folder to GitHub (as separate repo or set root directory as backend).
 
-### Frontend (Netlify/Vercel)
-1. Push `frontend` folder to GitHub.
-2. Connect to Netlify/Vercel.
-3. Build Command: `npm run build`
-4. Publish Directory: `build`
+Login to Koyeb and click Create Service.
+
+Select GitHub repo and branch.
+
+Set Environment Variables:
+
+PORT = 8000
+
+MONGO_URI = <your_mongodb_atlas_url>
+
+JWT_SECRET = <your_secret_key>
+
+NODE_ENV = production
+
+Build Command:
+
+npm install
+
+
+Start Command:
+
+node server.js
+
+
+Deploy and copy your backend live URL:
+
+Example:
+
+https://your-backend.koyeb.app
+
+✅ Frontend (Vercel)
+
+Push frontend folder to GitHub.
+
+Login to Vercel and click New Project.
+
+Import your GitHub frontend repo.
+
+Set Environment Variable in Vercel:
+
+Key:
+
+VITE_API_URL
+
+
+Value:
+
+https://your-backend.koyeb.app
+
+
+Build Command:
+
+npm run build
+
+
+Output Directory (Publish Directory):
+
+dist
+
+
+Click Deploy and get your frontend live URL:
+
+Example:
+
+https://your-frontend.vercel.app
